@@ -2,6 +2,7 @@
 	import { enhance, applyAction } from '$app/forms';
 	import { slide } from 'svelte/transition';
 	import { Circle } from 'svelte-loading-spinners';
+	import { JsonView } from '@zerodevx/svelte-json-view';
 	/** @type {import('./$types').ActionData} */
 	export let form;
 	let response;
@@ -11,7 +12,7 @@
 <form
 	class="w-full flex flex-col my-4"
 	method="POST"
-	action="/api/perspective"
+	action="/api/openai"
 	use:enhance={() => {
 		response = null;
 		loading = true;
@@ -37,27 +38,19 @@
 	<p class="text-red-600">Error: {form?.error}</p>
 {/if}
 {#if response}
-	<ul class="border-solid">
-		{#each Object.entries(response?.data?.response?.attributeScores)?.sort() as [name, data]}
-			<li class="contents">
-				<div class="score name">
-					<p>{name}:</p>
-				</div>
-				<div transition:slide class="score number">
-					<p style:color={`hsl(${100 - data?.summaryScore?.value * 100},100%,50%)`}>
-						{data?.summaryScore?.value}
-					</p>
-				</div>
-			</li>
-		{/each}
-		<li class="contents text-right">
-			<div class="score col-span-2">
-				<p>
-					"{response?.data?.text}"
-				</p>
-			</div>
-		</li>
-	</ul>
+	<div class="flex flex-row justify-center">
+		<p class="!text-9xl">
+			{#if response?.data?.response?.choices?.[0]?.text == 2}
+				❌
+			{:else if response?.data?.response?.choices?.[0]?.text == 1}
+				🙅‍♂️
+			{:else if response?.data?.response?.choices?.[0]?.text == 0}
+				✅
+			{:else}
+				<JsonView json={response} />
+			{/if}
+		</p>
+	</div>
 {/if}
 
 <style>

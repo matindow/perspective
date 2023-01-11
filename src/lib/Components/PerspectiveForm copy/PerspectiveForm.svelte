@@ -11,7 +11,7 @@
 <form
 	class="w-full flex flex-col my-4"
 	method="POST"
-	action="/api/perspective"
+	action="/api"
 	use:enhance={() => {
 		response = null;
 		loading = true;
