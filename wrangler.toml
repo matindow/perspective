@@ -1,0 +1,14 @@
+name = "perspective"
+
+account_id = "0bdaf3b5fbf493dd77af7179364dabef"
+workers_dev = true
+
+compatibility_date = "2023-01-11"
+
+main = "./.build/worker.js"
+
+[build]
+command = "npm install && npm run build"
+
+[site]
+bucket = "./.build/public"# Add the directory with your static assets!

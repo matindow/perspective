@@ -1,0 +1,20 @@
+/* Write your global styles here, in PostCSS syntax */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+main {    
+    padding: 1.5rem 0;
+	container-type: inline-size;
+}
+
+section {
+	padding: 0rem 1.5rem;
+	width: 100%;
+	max-width: calc(60ch - 1.5rem);
+}
+@container (min-width: calc(60ch + 1.5rem)) {
+	section {
+		padding: 0;
+	}
+}
