@@ -11,8 +11,7 @@ export const actions = {
 		// /**@type {Map<string, string>} */
 		const formData = await request.formData();
 		const data = Object.fromEntries(formData.entries());
-		try {
-			// console.log(data)
+		try {			
 			let response = await perspective.analyze({
 				comment: { text: data.text },
 				requestedAttributes: {
