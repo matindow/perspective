@@ -1,5 +1,5 @@
 <script>
-	import { enhance, applyAction } from '$app/forms';	
+	import { enhance, applyAction } from '$app/forms';
 	/** @type {import('./$types').ActionData} */
 	export let form;
 	let response = null;
@@ -8,36 +8,34 @@
 </script>
 
 <form
-	class="w-full flex flex-col mt-4"
+	class="w-full flex flex-col my-4"
 	method="POST"
 	action="/api"
 	use:enhance={() => {
 		return async ({ result }) => {
 			loading = true;
 			text = null;
-			response = null;			
-			await applyAction(result);			
+			response = null;
+			await applyAction(result);
 			response = result?.data?.response;
+			console.log(response);
 			text = result?.data?.text;
-			loading = false;			
+			loading = false;
 		};
 	}}
 >
 	<input autofocus required name="text" class="form-input" />
 	<button class="btn" type="submit">Submit</button>
 </form>
-{#if form?.error}	
+{#if form?.error}
 	<p class="text-red-600">Error: {form?.error}</p>
 {/if}
 {#if loading}
-<p>loading...</p>
+	<p>loading...</p>
 {/if}
 {#if response}
-	{#if text}
-		<p>"{text}"</p>
-	{/if}
 	<ul>
-		{#each Object.entries(response?.attributeScores) as [name, data]}
+		{#each Object.entries(response?.attributeScores)?.sort() as [name, data]}
 			<li class="contents">
 				<div class="score name">
 					<p>{name}:</p>
@@ -50,6 +48,9 @@
 			</li>
 		{/each}
 	</ul>
+{/if}
+{#if text}
+	<p class="text-right">"{text}"</p>
 {/if}
 
 <style>

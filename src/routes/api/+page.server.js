@@ -6,7 +6,6 @@ export const prerender = false;
 
 const perspective = new Perspective({ apiKey: PERSPECTIVE_API_KEY });
 
-
 export const actions = {
 	default: async ({ request }) => {
 		// /**@type {Map<string, string>} */
@@ -14,18 +13,20 @@ export const actions = {
 		const data = Object.fromEntries(formData.entries());
 		try {
 			// console.log(data)
-			let response = await perspective.analyze(data.text, {
-				attributes: [
-					'TOXICITY',					
-					'IDENTITY_ATTACK',
-					'INSULT',
-					'PROFANITY',
-					'THREAT',
-					'SEXUALLY_EXPLICIT'
-				]
-			});			
-			return {response}			
-		} catch (err) {			
+			let response = await perspective.analyze({
+				comment: { text: data.text },
+				requestedAttributes: {
+					TOXICITY: {},
+					IDENTITY_ATTACK: {},
+					INSULT: {},
+					PROFANITY: {},
+					THREAT: {},
+					SEXUALLY_EXPLICIT: {}
+				},
+				languages: ['en']
+			});
+			return {text: data.text, response };
+		} catch (err) {
 			return fail(400, { error: err.message });
 		}
 	}
