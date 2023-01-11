@@ -1,6 +1,5 @@
 <script>
-	import { enhance, applyAction } from '$app/forms';
-	import { slide } from 'svelte/transition';
+	import { enhance, applyAction } from '$app/forms';	
 	import { Circle } from 'svelte-loading-spinners';
 	import { JsonView } from '@zerodevx/svelte-json-view';
 	/** @type {import('./$types').ActionData} */
@@ -52,21 +51,3 @@
 		</p>
 	</div>
 {/if}
-
-<style>
-	ul {
-		margin-top: 1rem;
-		display: grid;
-		grid-template-columns: auto 1fr;
-		justify-content: start;
-		gap: 1px 1px;
-		border-radius: 1rem;
-		overflow: hidden;
-	}
-	.score {
-		padding: 1rem;
-	}
-	li:nth-of-type(odd) .score {
-		background-color: rgba(128, 128, 128, 0.2);
-	}
-</style>
