@@ -5,7 +5,9 @@
 </script>
 
 <section class="grid grid-flow-row">
-	<h1 class="font-bold text-right">Perspective API</h1>
+	<h1 class="font-bold flex justify-end">
+		<a href="https://www.perspectiveapi.com/">Perspective API</a>
+	</h1>
 	<div>
 		<PerspectiveForm {form} />
 	</div>

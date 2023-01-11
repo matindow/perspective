@@ -8,7 +8,7 @@
 </script>
 
 <form
-	class="w-full flex flex-col"
+	class="w-full flex flex-col mt-4"
 	method="POST"
 	action="/api"
 	use:enhance={() => {
